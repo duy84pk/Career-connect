@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Duy Phạm – Chuyên Gia Hướng Nghiệp</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-white:   #ffffff;
+    --bg-blue1:   #f0f6ff;
+    --bg-blue2:   #e8f1fb;
+    --bg-blue3:   #ddeaf8;
+    --navy:       #0f2444;
+    --blue-dark:  #1a3a5c;
+    --blue-mid:   #2d5f8a;
+    --text-muted: #5a7899;
+    --text-light: #8aaac8;
+    --orange:     #f07c20;
+    --orange-dk:  #d4650e;
+    --orange-pale:#fff3e8;
+    --orange-bd:  #f9c48a;
+    --border:     #ccddf0;
+    --border-dk:  #b8cfe8;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    background: var(--bg-white);
+    color: var(--blue-dark);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 5%;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.55rem; font-weight: 700;
+    color: var(--navy); text-decoration: none;
+  }
+  .nav-logo span { color: var(--orange); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.07em;
+    text-transform: uppercase; color: var(--text-muted); text-decoration: none;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--blue-mid); }
+  .nav-cta {
+    background: var(--orange); color: #fff;
+    padding: .55rem 1.4rem; border-radius: 6px;
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; text-decoration: none;
+    transition: background .2s, transform .15s;
+    box-shadow: 0 2px 10px rgba(240,124,32,.28);
+  }
+  .nav-cta:hover { background: var(--orange-dk); transform: translateY(-1px); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 55% 45%;
+    padding-top: 80px;
+    background: var(--bg-white);
+    position: relative; overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, #bdd5ee 1px, transparent 1px);
+    background-size: 28px 28px;
+    opacity: .3; pointer-events: none;
+  }
+
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 6rem 3.5rem 6rem 8%;
+    position: relative; z-index: 2;
+  }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: .55rem;
+    background: var(--orange-pale); border: 1px solid var(--orange-bd);
+    border-radius: 20px; padding: .35rem 1rem;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--orange);
+    margin-bottom: 2rem; width: fit-content;
+    animation: fadeUp .6s ease both;
+  }
+  .hero-tag::before {
+    content: ''; width: 7px; height: 7px;
+    background: var(--orange); border-radius: 50%; flex-shrink: 0;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.6rem, 4.8vw, 4rem);
+    font-weight: 700; line-height: 1.1;
+    color: var(--navy); margin-bottom: 1.4rem;
+    animation: fadeUp .7s .1s ease both;
+  }
+  .hero-title em { color: var(--orange); font-style: italic; }
+
+  .hero-promise {
+    font-size: 1rem; color: var(--text-muted); line-height: 1.75;
+    max-width: 480px; margin-bottom: 2.4rem;
+    border-left: 3px solid var(--orange); padding-left: 1.1rem;
+    animation: fadeUp .7s .2s ease both;
+  }
+
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp .7s .3s ease both; }
+
+  .btn-primary {
+    background: var(--orange); color: #fff;
+    padding: .9rem 2rem; border-radius: 8px;
+    font-size: 0.88rem; font-weight: 700;
+    text-decoration: none; transition: all .22s;
+    border: 2px solid var(--orange);
+    box-shadow: 0 4px 18px rgba(240,124,32,.32);
+  }
+  .btn-primary:hover { background: var(--orange-dk); border-color: var(--orange-dk); transform: translateY(-2px); box-shadow: 0 8px 26px rgba(240,124,32,.38); }
+
+  .btn-outline {
+    background: transparent; color: var(--navy);
+    padding: .9rem 2rem; border-radius: 8px;
+    font-size: 0.88rem; font-weight: 700;
+    text-decoration: none; transition: all .22s;
+    border: 2px solid var(--border-dk);
+  }
+  .btn-outline:hover { background: var(--bg-blue2); border-color: var(--blue-mid); color: var(--blue-mid); }
+
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 3.5rem;
+    padding-top: 2rem; border-top: 1px solid var(--border);
+    animation: fadeUp .7s .4s ease both;
+  }
+  .hero-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.3rem; font-weight: 700; color: var(--orange); line-height: 1;
+  }
+  .hero-stat-label { font-size: 0.73rem; color: var(--text-muted); margin-top: .2rem; }
+
+  .hero-right {
+    position: relative; display: flex; align-items: flex-end; justify-content: center;
+    background: linear-gradient(145deg, var(--bg-blue1) 0%, var(--bg-blue2) 100%);
+    animation: fadeUp .8s .15s ease both;
+  }
+  .hero-img-wrap {
+    position: relative; width: 100%; height: 100%;
+    display: flex; align-items: flex-end; justify-content: center;
+  }
+  .hero-ring { position: absolute; border-radius: 50%; border: 1.5px solid var(--border-dk); }
+  .hero-ring-1 { width: 340px; height: 340px; top: 50%; left: 50%; transform: translate(-50%,-55%); opacity: .5; }
+  .hero-ring-2 { width: 480px; height: 480px; top: 50%; left: 50%; transform: translate(-50%,-55%); opacity: .25; }
+
+  .hero-photo-placeholder {
+    width: 360px; height: 510px;
+    background: linear-gradient(180deg, #7ab0d8 0%, #3a7ab8 55%, #1a4a80 100%);
+    border-radius: 220px 220px 0 0;
+    position: relative; overflow: hidden;
+    box-shadow: 0 24px 60px rgba(26,74,128,.22);
+  }
+  .hero-photo-placeholder::before {
+    content: ''; position: absolute; top: 55px; left: 50%; transform: translateX(-50%);
+    width: 82px; height: 82px; background: rgba(255,255,255,.35); border-radius: 50%;
+  }
+  .hero-photo-placeholder::after {
+    content: ''; position: absolute; top: 160px; left: 50%; transform: translateX(-50%);
+    width: 155px; height: 230px; background: rgba(255,255,255,.22); border-radius: 80px 80px 0 0;
+  }
+
+  .hero-badge {
+    position: absolute; bottom: 2.2rem; left: -1.8rem;
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 10px; padding: .95rem 1.3rem;
+    box-shadow: 0 8px 32px rgba(15,36,68,.12);
+    display: flex; align-items: center; gap: .8rem;
+    animation: float 4s ease-in-out infinite;
+  }
+  .hero-badge-icon { font-size: 1.5rem; }
+  .hero-badge-text { font-size: 0.7rem; font-weight: 600; color: var(--navy); }
+  .hero-badge-text span { color: var(--orange); font-size: 1rem; font-weight: 700; display: block; }
+
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+
+  /* COMMONS */
+  section { padding: 7rem 8%; }
+  .section-label {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--orange);
+    margin-bottom: .7rem;
+    display: flex; align-items: center; gap: .6rem;
+  }
+  .section-label::after {
+    content: ''; flex: 1; max-width: 36px; height: 2px;
+    background: var(--orange); border-radius: 2px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.9rem, 3.2vw, 2.7rem);
+    font-weight: 700; line-height: 1.2; color: var(--navy);
+  }
+  .section-title em { color: var(--orange); font-style: italic; }
+
+  /* ABOUT */
+  #about {
+    background: var(--navy);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  }
+  #about .section-title { color: #fff; }
+  #about .section-label { color: var(--orange-bd); }
+  #about .section-label::after { background: var(--orange-bd); }
+  .about-text { font-size: .97rem; color: #a8c4dc; line-height: 1.85; }
+  .about-text p + p { margin-top: 1rem; }
+  .about-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; margin-top: 2.4rem; }
+  .about-hl { background: rgba(255,255,255,.05); border: 1px solid rgba(240,124,32,.25); border-radius: 8px; padding: 1.2rem; }
+  .about-hl-num { font-family: 'Cormorant Garamond', serif; font-size: 2.1rem; font-weight: 700; color: var(--orange); }
+  .about-hl-label { font-size: 0.76rem; color: #7a9ab8; margin-top: .15rem; }
+  .about-partners { margin-top: 2.5rem; }
+  .about-partners-title { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: #4a6a88; margin-bottom: .9rem; }
+  .partner-chips { display: flex; flex-wrap: wrap; gap: .55rem; }
+  .partner-chip { background: rgba(255,255,255,.06); border: 1px solid rgba(168,196,220,.2); border-radius: 4px; padding: .38rem .85rem; font-size: 0.74rem; font-weight: 500; color: #8aaac8; }
+  .about-visual { position: relative; display: flex; align-items: center; justify-content: center; }
+  .about-card { background: var(--orange); border-radius: 12px; padding: 2.8rem; width: 340px; position: relative; }
+  .about-card-quote { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-style: italic; color: #fff; line-height: 1.55; margin-bottom: 1.5rem; }
+  .about-card-quote::before { content: '\201C'; font-size: 4rem; line-height: 0; vertical-align: -1.2rem; color: rgba(255,255,255,.35); font-family: 'Cormorant Garamond', serif; }
+  .about-card-author { font-size: 0.8rem; color: rgba(255,255,255,.75); font-weight: 500; }
+  .about-card-author strong { color: #fff; display: block; font-size: .88rem; }
+  .about-dot-grid { position: absolute; top: -28px; right: -28px; width: 110px; height: 110px; background-image: radial-gradient(circle, rgba(240,124,32,.3) 1.5px, transparent 1.5px); background-size: 11px 11px; }
+
+  /* SERVICES */
+  #services { background: var(--bg-blue1); }
+  .services-header { text-align: center; max-width: 580px; margin: 0 auto 4rem; }
+  .services-header .section-label { justify-content: center; }
+  .services-header .section-label::after { display: none; }
+  .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.4rem; }
+  .service-card {
+    background: var(--bg-white); border: 1px solid var(--border);
+    border-radius: 12px; padding: 2.4rem;
+    transition: all .28s; position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 4px; background: var(--orange);
+    transform: scaleX(0); transition: transform .28s; transform-origin: left;
+  }
+  .service-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(15,36,68,.1); border-color: var(--orange-bd); }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon { width: 52px; height: 52px; border-radius: 12px; background: var(--orange-pale); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 1.4rem; }
+  .service-title { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-weight: 700; color: var(--navy); margin-bottom: .7rem; }
+  .service-desc { font-size: 0.86rem; color: var(--text-muted); line-height: 1.72; margin-bottom: 1.4rem; }
+  .service-items { list-style: none; display: flex; flex-direction: column; gap: .48rem; }
+  .service-items li { font-size: 0.81rem; color: var(--blue-mid); font-weight: 500; display: flex; align-items: center; gap: .5rem; }
+  .service-items li::before { content: '→'; color: var(--orange); font-size: .78rem; }
+
+  /* PROCESS */
+  #process { background: var(--bg-white); text-align: center; }
+  #process .section-label { justify-content: center; }
+  #process .section-label::after { display: none; }
+  .process-intro { color: var(--text-muted); max-width: 500px; margin: .9rem auto 4rem; line-height: 1.72; }
+  .process-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; position: relative; margin-top: 2rem; }
+  .process-steps::before {
+    content: ''; position: absolute; top: 35px; left: 12.5%; right: 12.5%;
+    height: 2px; background: linear-gradient(90deg, var(--orange) 0%, var(--orange-bd) 100%); z-index: 0;
+  }
+  .process-step { padding: 0 1.4rem; position: relative; z-index: 1; }
+  .step-num {
+    width: 70px; height: 70px; border-radius: 50%;
+    background: var(--bg-white); border: 2px solid var(--orange);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.4rem;
+    font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight: 700; color: var(--orange);
+  }
+  .process-step:first-child .step-num { background: var(--orange); color: #fff; box-shadow: 0 4px 16px rgba(240,124,32,.35); }
+  .step-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: .45rem; }
+  .step-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.65; }
+
+  /* TESTIMONIALS */
+  #testimonials { background: var(--bg-blue2); }
+  .testimonials-header { margin-bottom: 3rem; }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.4rem; }
+  .testi-card { background: var(--bg-white); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; transition: box-shadow .25s; }
+  .testi-card:hover { box-shadow: 0 12px 40px rgba(15,36,68,.09); }
+  .testi-stars { color: var(--orange); font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 1rem; }
+  .testi-text { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-style: italic; color: var(--navy); line-height: 1.65; margin-bottom: 1.4rem; }
+  .testi-divider { height: 1px; background: var(--border); margin-bottom: 1.1rem; }
+  .testi-author { display: flex; align-items: center; gap: .75rem; }
+  .testi-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--bg-blue2); border: 2px solid var(--border-dk); display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; color: var(--blue-mid); font-family: 'Cormorant Garamond', serif; flex-shrink: 0; }
+  .testi-name { font-size: 0.84rem; font-weight: 700; color: var(--navy); }
+  .testi-role { font-size: 0.73rem; color: var(--text-muted); margin-top: .1rem; }
+  .testi-result { margin-top: 1rem; padding: .58rem .88rem; background: var(--orange-pale); border-radius: 6px; font-size: 0.74rem; font-weight: 700; color: var(--orange); border: 1px solid var(--orange-bd); }
+
+  /* CONTACT */
+  #contact { background: var(--navy); display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  #contact .section-title { color: #fff; }
+  #contact .section-label { color: var(--orange-bd); }
+  #contact .section-label::after { background: var(--orange-bd); }
+  .contact-desc { color: #7a9ab8; line-height: 1.72; margin-top: 1.1rem; }
+  .contact-benefits { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: .8rem; }
+  .contact-benefits li { font-size: 0.87rem; color: #a8c4dc; display: flex; align-items: center; gap: .8rem; }
+  .contact-benefits li::before { content: '✓'; width: 22px; height: 22px; background: rgba(240,124,32,.15); border: 1.5px solid var(--orange); border-radius: 50%; font-size: 0.68rem; color: var(--orange); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+  .contact-form { background: var(--bg-white); border-radius: 14px; padding: 2.5rem; box-shadow: 0 20px 60px rgba(0,0,0,.18); }
+  .form-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--navy); margin-bottom: 1.8rem; }
+  .form-group { margin-bottom: 1.15rem; }
+  .form-group label { display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: .38rem; }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%; background: var(--bg-blue1); border: 1.5px solid var(--border);
+    border-radius: 8px; padding: .72rem 1rem;
+    font-family: 'Be Vietnam Pro', sans-serif; font-size: 0.87rem; color: var(--navy);
+    outline: none; transition: border-color .2s, box-shadow .2s;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(240,124,32,.12); }
+  .form-group textarea { resize: none; height: 78px; }
+  .form-submit {
+    width: 100%; background: var(--orange); color: #fff;
+    border: none; border-radius: 8px; padding: 1rem;
+    font-family: 'Be Vietnam Pro', sans-serif; font-size: 0.88rem; font-weight: 700; letter-spacing: 0.07em;
+    text-transform: uppercase; cursor: pointer; transition: background .22s, transform .15s, box-shadow .22s;
+    margin-top: .5rem; box-shadow: 0 4px 16px rgba(240,124,32,.32);
+  }
+  .form-submit:hover { background: var(--orange-dk); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(240,124,32,.4); }
+  .form-note { font-size: 0.7rem; color: var(--text-light); text-align: center; margin-top: .8rem; }
+
+  /* FOOTER */
+  footer { background: #08172e; padding: 2.2rem 8%; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(240,124,32,.18); }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: #fff; text-decoration: none; }
+  .footer-logo span { color: var(--orange); }
+  .footer-copy { font-size: 0.72rem; color: #3a5a78; }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { font-size: 0.72rem; color: #3a5a78; text-decoration: none; transition: color .2s; }
+  .footer-links a:hover { color: var(--orange); }
+
+  /* RESPONSIVE */
+  @media (max-width: 960px) {
+    #hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 340px; }
+    .hero-left { padding: 4rem 5% 2rem; }
+    #about, #contact { grid-template-columns: 1fr; }
+    .about-visual { order: -1; }
+    .services-grid, .testimonials-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .process-steps::before { display: none; }
+    nav .nav-links { display: none; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 4rem 5%; }
+    .process-steps { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    .hero-stats { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><span>Duy</span> Phạm</a>
+  <ul class="nav-links">
+    <li><a href="#about">Chuyên gia</a></li>
+    <li><a href="#services">Dịch vụ</a></li>
+    <li><a href="#process">Quy trình</a></li>
+    <li><a href="#testimonials">Phản hồi</a></li>
+  </ul>
+  <a class="nav-cta" href="#contact">Đăng ký tư vấn</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Chuyên Gia Hướng Nghiệp Hàng Đầu</div>
+    <h1 class="hero-title">
+      Định hướng đúng —<br>
+      <em>Tương lai vững</em>
+    </h1>
+    <p class="hero-promise">
+      Tôi giúp bạn khám phá điểm mạnh, chọn đúng ngành nghề và xây dựng lộ trình sự nghiệp rõ ràng — để không còn lo lắng về bước tiếp theo trong cuộc đời.
+    </p>
+    <div class="hero-btns">
+      <a class="btn-primary" href="#contact">📋 Đăng ký tư vấn</a>
+      <a class="btn-outline" href="#contact">🎁 Nhận lộ trình miễn phí</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">500+</div>
+        <div class="hero-stat-label">Học viên đã tư vấn</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">8+</div>
+        <div class="hero-stat-label">Năm kinh nghiệm</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">95%</div>
+        <div class="hero-stat-label">Tỉ lệ hài lòng</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-wrap">
+      <div class="hero-ring hero-ring-2"></div>
+      <div class="hero-ring hero-ring-1"></div>
+      <div class="hero-photo-placeholder"></div>
+      <div class="hero-badge">
+        <span class="hero-badge-icon">🏆</span>
+        <div class="hero-badge-text">
+          <span>Top 10</span>
+          Chuyên gia hướng nghiệp 2024
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div>
+    <div class="section-label">Chuyên gia</div>
+    <h2 class="section-title">Duy Phạm —<br><em>Người đồng hành</em><br>sự nghiệp của bạn</h2>
+    <div class="about-text" style="margin-top:1.5rem;">
+      <p>Với hơn <strong style="color:#d4eaff;">8 năm kinh nghiệm</strong> trong lĩnh vực tư vấn hướng nghiệp, đào tạo kỹ năng và kết nối nhân sự, tôi đã đồng hành cùng hàng trăm bạn trẻ Việt Nam tìm ra con đường sự nghiệp phù hợp nhất với bản thân.</p>
+      <p>Tôi chuyên phục vụ học sinh THPT, sinh viên đại học và người đi làm muốn thay đổi định hướng — những người cần một người dẫn đường thực sự, không chỉ lý thuyết.</p>
+    </div>
+    <div class="about-highlights">
+      <div class="about-hl"><div class="about-hl-num">500+</div><div class="about-hl-label">Học viên cá nhân</div></div>
+      <div class="about-hl"><div class="about-hl-num">50+</div><div class="about-hl-label">Doanh nghiệp đối tác</div></div>
+      <div class="about-hl"><div class="about-hl-num">30+</div><div class="about-hl-label">Workshop đã tổ chức</div></div>
+      <div class="about-hl"><div class="about-hl-num">8+</div><div class="about-hl-label">Năm kinh nghiệm</div></div>
+    </div>
+    <div class="about-partners">
+      <div class="about-partners-title">Đơn vị từng đồng hành</div>
+      <div class="partner-chips">
+        <span class="partner-chip">FPT Software</span>
+        <span class="partner-chip">Vingroup</span>
+        <span class="partner-chip">ĐH Quốc Gia HN</span>
+        <span class="partner-chip">ĐH Bách Khoa</span>
+        <span class="partner-chip">Unilever Vietnam</span>
+        <span class="partner-chip">Navigos Group</span>
+      </div>
+    </div>
+  </div>
+  <div class="about-visual">
+    <div class="about-dot-grid"></div>
+    <div class="about-card">
+      <div class="about-card-quote">Hướng nghiệp đúng không chỉ là chọn nghề — đó là chọn phiên bản tốt nhất của chính mình.</div>
+      <div class="about-card-author">
+        <strong>Duy Phạm</strong>
+        Chuyên gia Hướng nghiệp & Phát triển nhân sự
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <div class="section-label">Dịch vụ</div>
+    <h2 class="section-title">3 Dịch vụ <em>chuyên sâu</em></h2>
+    <p style="color:var(--text-muted);margin-top:.8rem;line-height:1.72;">Giải pháp toàn diện từ định hướng ngành nghề, phát triển kỹ năng đến kết nối cơ hội việc làm thực tế.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🧭</div>
+      <div class="service-title">Hướng Nghiệp</div>
+      <p class="service-desc">Khám phá bản thân, định hướng ngành nghề và xây dựng lộ trình học tập phù hợp với điểm mạnh và đam mê của bạn.</p>
+      <ul class="service-items">
+        <li>Trắc nghiệm tính cách & năng lực</li>
+        <li>Tư vấn chọn ngành, chọn trường</li>
+        <li>Lập lộ trình học tập chi tiết</li>
+        <li>Khám phá đa dạng cơ hội nghề nghiệp</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎯</div>
+      <div class="service-title">Đào Tạo Kỹ Năng</div>
+      <p class="service-desc">Trang bị các kỹ năng mềm thiết yếu giúp bạn tự tin bước vào môi trường chuyên nghiệp và phát triển bền vững.</p>
+      <ul class="service-items">
+        <li>Kỹ năng giao tiếp & thuyết trình</li>
+        <li>Kỹ thuật phỏng vấn xin việc</li>
+        <li>Tác phong & văn hóa làm việc</li>
+        <li>Xây dựng thương hiệu cá nhân</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🤝</div>
+      <div class="service-title">Tuyển Dụng Nhân Sự</div>
+      <p class="service-desc">Kết nối sinh viên mới ra trường với cơ hội thực tập và việc làm phù hợp tại các doanh nghiệp uy tín.</p>
+      <ul class="service-items">
+        <li>Tư vấn & chỉnh sửa CV chuyên nghiệp</li>
+        <li>Luyện tập phỏng vấn thực tế</li>
+        <li>Kết nối mạng lưới doanh nghiệp đối tác</li>
+        <li>Tuyển dụng thực tập & fresher</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-label">Quy trình</div>
+  <h2 class="section-title">4 bước <em>đơn giản</em> để thay đổi</h2>
+  <p class="process-intro">Từ lần đầu liên hệ đến khi bạn có trong tay cơ hội việc làm mơ ước — chúng tôi đồng hành từng bước.</p>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-num">1</div>
+      <div class="step-title">Đăng ký</div>
+      <p class="step-desc">Điền form hoặc nhắn tin trực tiếp. Nhận phản hồi trong vòng 24 giờ.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">2</div>
+      <div class="step-title">Đánh giá</div>
+      <p class="step-desc">Làm bài trắc nghiệm và phỏng vấn sơ bộ để hiểu rõ nhu cầu & tiềm năng.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">3</div>
+      <div class="step-title">Tư vấn & Đào tạo</div>
+      <p class="step-desc">Nhận lộ trình cá nhân hoá và tham gia các buổi coaching/training chuyên sâu.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">4</div>
+      <div class="step-title">Kết nối cơ hội</div>
+      <p class="step-desc">Được giới thiệu đến doanh nghiệp đối tác phù hợp và hỗ trợ đến khi đi làm.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-header">
+    <div class="section-label">Phản hồi</div>
+    <h2 class="section-title">Học viên <em>nói gì</em>?</h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">Sau 3 buổi tư vấn với anh Duy, tôi không chỉ biết mình muốn làm gì mà còn có một lộ trình học tập rất cụ thể. Điều mà 4 năm đại học tôi chưa tìm ra.</p>
+      <div class="testi-divider"></div>
+      <div class="testi-author">
+        <div class="testi-avatar">N</div>
+        <div>
+          <div class="testi-name">Nguyễn Minh Khoa</div>
+          <div class="testi-role">Sinh viên năm 3, ĐH Bách Khoa Hà Nội</div>
+        </div>
+      </div>
+      <div class="testi-result">✓ Đã được nhận vào FPT Software sau 2 tháng</div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">Chương trình luyện phỏng vấn của anh Duy rất thực tế. Anh chia sẻ cả những câu hỏi khó mà nhà tuyển dụng hay hỏi bẫy và cách trả lời tự nhiên, không cứng nhắc.</p>
+      <div class="testi-divider"></div>
+      <div class="testi-author">
+        <div class="testi-avatar">T</div>
+        <div>
+          <div class="testi-name">Trần Thị Hoa</div>
+          <div class="testi-role">Marketing Executive, Unilever Vietnam</div>
+        </div>
+      </div>
+      <div class="testi-result">✓ Offer lương vượt kỳ vọng 20%</div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">Tôi từng nghĩ mình không phù hợp với việc thuyết trình. Sau khóa đào tạo kỹ năng, tôi đã tự tin dẫn dắt pitch deck trước hội đồng 30 người. Cảm ơn anh Duy rất nhiều!</p>
+      <div class="testi-divider"></div>
+      <div class="testi-author">
+        <div class="testi-avatar">L</div>
+        <div>
+          <div class="testi-name">Lê Hoàng Anh</div>
+          <div class="testi-role">Business Analyst, Techcombank</div>
+        </div>
+      </div>
+      <div class="testi-result">✓ Thăng chức sau 8 tháng đi làm</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-left">
+    <div class="section-label">Bắt đầu ngay</div>
+    <h2 class="section-title">Sẵn sàng<br><em>thay đổi</em><br>tương lai?</h2>
+    <p class="contact-desc">Đừng để thêm một năm nữa trôi qua mà không có định hướng rõ ràng. Hãy để tôi giúp bạn bước đúng hướng ngay hôm nay.</p>
+    <ul class="contact-benefits">
+      <li>Buổi tư vấn đầu tiên 30 phút hoàn toàn miễn phí</li>
+      <li>Nhận bộ công cụ hướng nghiệp trị giá 500.000đ</li>
+      <li>Phản hồi trong vòng 24 giờ làm việc</li>
+      <li>Cam kết bảo mật thông tin tuyệt đối</li>
+    </ul>
+  </div>
+  <div>
+    <div class="contact-form">
+      <div class="form-title">Đăng ký nhận tư vấn</div>
+      <div class="form-group">
+        <label>Họ và tên *</label>
+        <input type="text" placeholder="Nguyễn Văn A">
+      </div>
+      <div class="form-group">
+        <label>Số điện thoại *</label>
+        <input type="tel" placeholder="0912 345 678">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="email@example.com">
+      </div>
+      <div class="form-group">
+        <label>Nhu cầu quan tâm *</label>
+        <select>
+          <option value="">-- Chọn dịch vụ --</option>
+          <option>Hướng nghiệp – Chọn ngành/nghề</option>
+          <option>Đào tạo kỹ năng mềm</option>
+          <option>Tư vấn CV & Phỏng vấn</option>
+          <option>Kết nối cơ hội việc làm</option>
+          <option>Nhận lộ trình miễn phí</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Chia sẻ thêm</label>
+        <textarea placeholder="Bạn đang gặp khó khăn gì? Tôi có thể giúp được gì?"></textarea>
+      </div>
+      <button class="form-submit" onclick="this.textContent='✓ Đã gửi! Chúng tôi sẽ liên hệ sớm nhất'">Gửi đăng ký ngay →</button>
+      <p class="form-note">🔒 Thông tin của bạn được bảo mật tuyệt đối. Không spam.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-logo" href="#"><span>Duy</span> Phạm</a>
+  <div class="footer-copy">© 2025 Duy Phạm Career Consulting. All rights reserved.</div>
+  <div class="footer-links">
+    <a href="#">Facebook</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">Zalo</a>
+    <a href="#">YouTube</a>
+  </div>
+</footer>
+
+</body>
+</html>
