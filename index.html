@@ -483,14 +483,14 @@
   .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.4rem; }
   .testi-card { background: var(--bg-white); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; transition: box-shadow .25s; }
   .testi-card:hover { box-shadow: 0 12px 40px rgba(15,36,68,.09); }
-  .testi-stars { color: var(--orange); font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 1rem; }
-  .testi-text { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-style: italic; color: var(--navy); line-height: 1.65; margin-bottom: 1.4rem; }
+  .testi-stars { color: var(--orange); font-size: 1.28rem; letter-spacing: 2px; margin-bottom: 1rem; }
+  .testi-text { font-family: 'Cormorant Garamond', serif; font-size: 1.58rem; font-style: italic; color: var(--navy); line-height: 1.65; margin-bottom: 1.4rem; }
   .testi-divider { height: 1px; background: var(--border); margin-bottom: 1.1rem; }
   .testi-author { display: flex; align-items: center; gap: .75rem; }
   .testi-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--bg-blue2); border: 2px solid var(--border-dk); display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; color: var(--blue-mid); font-family: 'Cormorant Garamond', serif; flex-shrink: 0; }
-  .testi-name { font-size: 0.84rem; font-weight: 700; color: var(--navy); }
-  .testi-role { font-size: 0.73rem; color: var(--text-muted); margin-top: .1rem; }
-  .testi-result { margin-top: 1rem; padding: .58rem .88rem; background: var(--orange-pale); border-radius: 6px; font-size: 0.74rem; font-weight: 700; color: var(--orange); border: 1px solid var(--orange-bd); }
+  .testi-name { font-size: 1.26rem; font-weight: 700; color: var(--navy); }
+  .testi-role { font-size: 1.1rem; color: var(--text-muted); margin-top: .1rem; }
+  .testi-result { margin-top: 1rem; padding: .75rem 1.1rem; background: var(--orange-pale); border-radius: 6px; font-size: 1.11rem; font-weight: 700; color: var(--orange); border: 1px solid var(--orange-bd); }
 
   /* CONTACT */
   #contact { background: var(--navy); display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
@@ -865,22 +865,26 @@
   </div>
   <div>
     <div class="contact-form">
+      <form id="contactForm" action="https://formsubmit.co/ajax/duy84pk@gmail.com" method="POST" style="margin:0;">
+      <input type="hidden" name="_subject" value="Đăng ký tư vấn - Career Connect">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
       <div class="form-title">Đăng ký nhận tư vấn</div>
       <div class="form-group">
         <label>Họ và tên *</label>
-        <input type="text" placeholder="Nguyễn Văn A">
+        <input type="text" name="Họ tên" placeholder="Nguyễn Văn A" required>
       </div>
       <div class="form-group">
         <label>Số điện thoại *</label>
-        <input type="tel" placeholder="0912 345 678">
+        <input type="tel" name="Số điện thoại" placeholder="0912 345 678" required>
       </div>
       <div class="form-group">
         <label>Email</label>
-        <input type="email" placeholder="email@example.com">
+        <input type="email" name="Email" placeholder="email@example.com">
       </div>
       <div class="form-group">
         <label>Nhu cầu quan tâm *</label>
-        <select>
+        <select name="Nhu cầu quan tâm" required>
           <option value="">-- Chọn dịch vụ --</option>
           <option>Hướng nghiệp – Chọn ngành/nghề</option>
           <option>Đào tạo kỹ năng mềm</option>
@@ -891,10 +895,47 @@
       </div>
       <div class="form-group">
         <label>Chia sẻ thêm</label>
-        <textarea placeholder="Bạn đang gặp khó khăn gì? Tôi có thể giúp được gì?"></textarea>
+        <textarea name="Chia sẻ thêm" placeholder="Bạn đang gặp khó khăn gì? Anh có thể giúp được gì?"></textarea>
       </div>
-      <button class="form-submit" onclick="this.textContent='✓ Đã gửi! Chúng tôi sẽ liên hệ sớm nhất'">Gửi đăng ký ngay →</button>
+      <button type="submit" class="form-submit" id="submitBtn">Gửi đăng ký ngay →</button>
+      <div id="formSuccess" style="display:none;margin-top:1rem;padding:.9rem 1rem;background:#e8f7ef;border:1px solid #6fcf97;border-radius:8px;color:#1a5c34;font-size:0.95rem;font-weight:600;text-align:center;">
+        ✓ Đã gửi thành công! Anh Duy sẽ liên hệ với em sớm nhất. 🎉
+      </div>
       <p class="form-note">🔒 Thông tin của bạn được bảo mật tuyệt đối. Không spam.</p>
+      </form>
+
+<script>
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = 'Đang gửi...';
+  btn.disabled = true;
+  btn.style.opacity = '0.7';
+  try {
+    const response = await fetch(this.action, {
+      method: 'POST',
+      body: new FormData(this),
+      headers: { 'Accept': 'application/json' }
+    });
+    const data = await response.json();
+    if (data.success === 'true' || data.success === true) {
+      document.getElementById('formSuccess').style.display = 'block';
+      btn.style.display = 'none';
+      this.reset();
+    } else {
+      btn.textContent = 'Gửi đăng ký ngay →';
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      alert('Có lỗi xảy ra, vui lòng thử lại hoặc liên hệ Zalo 0828387868');
+    }
+  } catch(err) {
+    btn.textContent = 'Gửi đăng ký ngay →';
+    btn.disabled = false;
+    btn.style.opacity = '1';
+    alert('Có lỗi kết nối, vui lòng thử lại hoặc liên hệ Zalo 0828387868');
+  }
+});
+</script>
     </div>
   </div>
 </section>
